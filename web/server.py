@@ -9,7 +9,7 @@ def main():
 def login():
     return render_template('login.html')
 
-@app.route('/mapa')
+@app.route('/mapa/')
 def mapa():
     return render_template('mapa.html')
 
