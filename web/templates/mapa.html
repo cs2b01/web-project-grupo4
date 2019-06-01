@@ -5,12 +5,9 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
       #map {
         height: 100%;
       }
-      /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
@@ -21,13 +18,68 @@
   <body>
     <div id="map"></div>
     <script>
-      var map;
       function initMap() {
+
+        var map;
+
+        var markers = [
+          ['UTEC - piso 2', -12.135601, -77.022506],
+          ['UTEC - Piso 6', -12.135486, -77.022223],
+          ['Salomé', -12.137139,  -77.020528],
+          ['Rincon Torrepa', -12.136653, -77.020507],
+          ['Menu de casa', -12.135239, -77.020970],
+          ['D Lucas', -12.135619, -77.021855],
+        ];
+
+        //InfoWindow de cada marcador
+        var infoWindowContent = [
+          ['<div class="info_content">' +
+          '<h3>UTEC - piso 2</h3>' +
+          '<p>3 opciones de menú</p>'],
+          ['<div class="info_content">' +
+          '<h3>UTEC - Piso 6</h3>' +
+          '<p>5 opciones de menú</p>'],
+          ['<div class="info_content">' +
+          '<h3>Salomé</h3>' +
+          '<p>6 opciones de menú</p>'],
+          ['<div class="info_content">' +
+          '<h3>Rincon Torrepa</h3>' +
+          '<p>6 opciones de menú</p>'],
+          ['<div class="info_content">' +
+          '<h3>Menu de casa</h3>' +
+          '<p>6 opciones de menú</p>'],
+          ['<div class="info_content">' +
+          '<h3>D Lucas</h3>' +
+          '<p>6 opciones de menú</p>']
+        ];
+
+        var infoWindow = new google.maps.InfoWindow(), marker, i;
+
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -12.135122, lng: -77.021999},
           zoom: 18
         });
+
+        //Genera los marcadores con sus respectivos infoWindows
+        for( i = 0; i < markers.length; i++ ){
+          var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+          var marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: markers[i][0]
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent(infoWindowContent[i][0]);
+                infoWindow.open(map, marker);
+            }
+            })(marker, i));
+
+          marker.setMap(map);
+        }
       }
+      google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV-habJPu3HBbCm0fgVjDutCpVWm5EfXc&callback=initMap"
     async defer></script>
