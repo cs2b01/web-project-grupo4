@@ -9,9 +9,9 @@ def main():
 def static_content(content):
     return render_template(content)
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
+@app.route('/registro_cliente')
+def registro_cliente():
+    return render_template('registro_cliente.html')
 
 @app.route('/mapa/')
 def mapa():
