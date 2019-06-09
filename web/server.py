@@ -5,10 +5,6 @@ app = Flask(__name__)
 def main():
     return render_template('index.html')
 
-@app.route('/static/<content>')
-def static_content(content):
-    return render_template(content)
-
 @app.route('/registro_cliente')
 def registro_cliente():
     return render_template('registro_cliente.html')
