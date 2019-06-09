@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster|Roboto&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+body{
+    width: 100%;
+}
+.header{
+    z-index: 2;
+    width: 100%;
+    height: 70px;
+    box-shadow: 1px 1px 6px #ccc;
+    margin-bottom: 20px;
+}
+main{
+    z-index: 1;
+    width: 90vw;
+    max-width: 900px;
+    margin: auto;    
+}
+p, li{
+    font-family: 'Roboto', serif;
+    line-height: 1.4em;
+    list-style-position: inside;
+}
+.contenedor{
+    width: 100%;
+    overflow: hidden;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0px 5px 10px 2px #ccc;
+    background-position: right center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
+.contenedor .image{
+    width: 100%;
+    height: 250px;
+    background-image: url(/static/images/restaurant.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.image .restaurant{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    position: relative;
+    z-index: 0;
+}
+.image h1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    font-size: 3.5em;
+    color: #fff;
+    text-shadow: 0 0 10px #888;
+}
+.contenedor .descp{
+    margin: auto;
+    width: 100%;
+    max-width: 500px;
+    padding: 1.5em;
+}
+.descp .first, .descp .second{
+    width: 100%;
+}
+.descp p.info{
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    font-size: 2em;
+    color: #C44569;
+}
+.descp .subtitle{
+    display: inline-block;
+    font-size: 1.5em;
+    font-family: 'Lobster', cursive;
+    margin: 0.4em 0px 0.3em;
+    color: #C44569;
+}
+.descp .line{
+    font-size: 1em;
+    margin-bottom: 0.8em;
+}
+.descp a{
+    color: #000;
+    transition: color ease .3s;
+}
+.descp a:hover{
+    color: #C44569;
+}
+.descp .icon{
+    margin-right: 0.15em;
+    color: #C44569;
+    font-size: 1.2em;
+}
+.rating{
+    margin-bottom: 1.4em;
+}
+.rating .icon{
+    font-size: 1.5em;
+    color: #E8FE11;
+}
+.linea{
+    display: inline-block;
+    width: 50px;
+    border: 2px solid #C44569;
+    border-radius: 2px;
+    transition: all ease .2s;
+}
+.descp:hover .linea{
+    width: 100px;
+    box-shadow: 1px 1px 3px 2px #ccc;
+}
+.second li{
+    list-style-image: url(/static/images/check.png);
+    line-height: 1.7em;
+}
+
+.baner{
+    width: 100%;
+    height: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(156,40,73,1);
+    background: -moz-linear-gradient(left, rgba(156,40,73,1) 0%, rgba(196,69,105,1) 1%, rgba(196,69,105,1) 42%, rgba(194,39,67,1) 76%, rgba(193,17,40,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(156,40,73,1)), color-stop(1%, rgba(196,69,105,1)), color-stop(42%, rgba(196,69,105,1)), color-stop(76%, rgba(194,39,67,1)), color-stop(100%, rgba(193,17,40,1)));
+    background: -webkit-linear-gradient(left, rgba(156,40,73,1) 0%, rgba(196,69,105,1) 1%, rgba(196,69,105,1) 42%, rgba(194,39,67,1) 76%, rgba(193,17,40,1) 100%);
+    background: -o-linear-gradient(left, rgba(156,40,73,1) 0%, rgba(196,69,105,1) 1%, rgba(196,69,105,1) 42%, rgba(194,39,67,1) 76%, rgba(193,17,40,1) 100%);
+    background: -ms-linear-gradient(left, rgba(156,40,73,1) 0%, rgba(196,69,105,1) 1%, rgba(196,69,105,1) 42%, rgba(194,39,67,1) 76%, rgba(193,17,40,1) 100%);
+    background: linear-gradient(to right, rgba(156,40,73,1) 0%, rgba(196,69,105,1) 1%, rgba(196,69,105,1) 42%, rgba(194,39,67,1) 76%, rgba(193,17,40,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9c2849', endColorstr='#c11128', GradientType=1 );
+
+}
+.baner p, .baner span{
+    text-align: center;
+    color: #fff;
+    font-size: 2.5em;
+    font-family: 'Lobster', cursive;
+    line-height: 3rem;
+}
+
+.baner span{
+    display: inline-block;
+    margin-left: 0.13em;
+    line-height: 100%;
+    font-size: 2.8em;
+}
+
+@media screen and (min-width: 980px){
+    .contenedor{
+        display: flex;
+        margin-top: 1.8em;
+    }
+    .first, .second{
+        width: 50%;
+        transition: all ease-in-out .2s;
+    }
+    .first{
+        box-shadow: 3px 0px 35px 10px #bbb;
+    }
+    .second{
+        box-shadow: -3px 0px 35px 10px #aaa;
+        display: flex;
+    }
+    .second .descp{
+        transform: translateY(-2em);
+        width: 260px;   
+    }
+    .baner{
+        height: 8.5em;
+        margin-top: 3em;
+    }
+}

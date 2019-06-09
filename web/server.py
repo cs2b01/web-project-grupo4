@@ -5,6 +5,10 @@ app = Flask(__name__)
 def main():
     return render_template('index.html')
 
+@app.route('/static/<content>')
+def static_content(content):
+    return render_template(content)
+
 @app.route('/login')
 def login():
     return render_template('login.html')
@@ -12,6 +16,10 @@ def login():
 @app.route('/mapa/')
 def mapa():
     return render_template('mapa.html')
+
+@app.route('/01.html')
+def restaurant():
+    return render_template('01.html')
 
 if __name__ == '__main__':
     app.run()
