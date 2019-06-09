@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>AppWeb</title>
-    <link rel="icon" href="{{ url_for('static',filename='images/icono.ico') }}">
+    <link rel="icon" href="/static/images/icono.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
     integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
     crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='icon/icon.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='fonts.css') }}">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/icon/icon.css">
+    <link rel="stylesheet" href="/static/fonts.css">
   </head>
   <body>
     <header>
@@ -50,7 +50,7 @@
     </header>
     <div class="header content">
       <div class="header-video">
-        <video src="{{ url_for('static',filename='video/videotest.mp4') }}" autoplay muted loop></video>
+        <video src="/static/video/maps_video.mp4" autoplay muted loop width="100%"></video>
       </div>
       <div class="header-overlay"></div>
 
@@ -82,6 +82,6 @@
     <i class="fas fa-ellipsis-v btn-menu"></i>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="{{ url_for('static',filename='js/script.js') }}"></script>
+    <script src="/static/js/script.js"></script>
   </body>
 </html>
