@@ -2,20 +2,24 @@ from sqlalchemy import Column, Integer, String, Sequence, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from database import connector
 
-class User(connector.Manager.Base):
-    __tablename__ = 'users'
-    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+class Client(connector.Manager.Base):
+    __tablename__ = 'client'
+    id = Column(Integer, Sequence('client_id_seq'), primary_key=True)
+    email = Column(String(12))
+    password = Column(String(12))
     name = Column(String(50))
     fullname = Column(String(50))
-    password = Column(String(12))
-    username = Column(String(12))
+    phone = Column(String(10))
+    address = Column(String(50))
 
-class Message(connector.Manager.Base):
-    __tablename__ = 'messages'
-    id = Column(Integer, Sequence('message_id_seq'), primary_key=True)
-    content = Column(String(500))
-    sent_on = Column(DateTime(timezone=True))
-    user_from_id = Column(Integer, ForeignKey('users.id'))
-    user_to_id = Column(Integer, ForeignKey('users.id'))
-    user_from = relationship(User, foreign_keys=[user_from_id])
-    user_to = relationship(User, foreign_keys=[user_to_id])
+class Provider(connector.Manager.Base):
+    __tablename__ = 'provider'
+    id = Column(Integer, Sequence('provider_id_seq'), primary_key=True)
+    name_fullname = Column(String(60))
+    email = Column(String(30))
+    phone = Column(String(10))
+    password = Column(String(15))
+    name_restaurant = Column(String(30))
+    num_mesas = Column(Integer)
+    address = Column(String(50))
+    slogan = Column(String(20))

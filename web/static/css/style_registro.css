@@ -7,10 +7,9 @@
 html {
 	height: 100%;
 	/*Image only BG fallback*/
-	
+
 	/*background = gradient + image pattern combo*/
-	background: 
-		linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
+	background-image: url("http://nordnorge.com/sites/l/lofoten.info/files/817651150.jpeg");
 }
 
 body {
@@ -18,21 +17,21 @@ body {
 }
 /*form styles*/
 #msform {
-	width: 400px;
-	margin: 50px auto;
+	width: 95%;
+	margin: 5% auto;
 	text-align: center;
 	position: relative;
 }
 #msform fieldset {
-	background: white;
+	background: #ffffffb0;
 	border: 0 none;
-	border-radius: 3px;
-	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-	padding: 20px 30px;
+	border-radius: 25px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.66);
+	padding: 40px 40px;
 	box-sizing: border-box;
 	width: 80%;
 	margin: 0 10%;
-	
+
 	/*stacking fieldsets above each other*/
 	position: relative;
 }
@@ -43,23 +42,24 @@ body {
 /*inputs*/
 #msform input, #msform textarea {
 	padding: 15px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
+	border: 2px solid #b1afaf;
+	border-radius: 15px;
 	margin-bottom: 10px;
 	width: 100%;
 	box-sizing: border-box;
 	font-family: montserrat;
-	color: #2C3E50;
-	font-size: 13px;
+	color: #353131;
+	font-size: 15px;
+	font-weight: 600;
 }
 /*buttons*/
 #msform .action-button {
 	width: 100px;
-	background: #27AE60;
+	background: #2731ae;
 	font-weight: bold;
 	color: white;
 	border: 0 none;
-	border-radius: 1px;
+	border-radius: 10px;
 	cursor: pointer;
 	padding: 10px 5px;
 	margin: 10px 5px;
@@ -69,15 +69,16 @@ body {
 }
 /*headings*/
 .fs-title {
-	font-size: 15px;
+	font-size: 20px;
+	font-weight: 600;
 	text-transform: uppercase;
-	color: #2C3E50;
+	color: #333333;
 	margin-bottom: 10px;
 }
 .fs-subtitle {
-	font-weight: normal;
-	font-size: 13px;
-	color: #666;
+	font-weight: bolder;
+	font-size: 14px;
+	color: #333333;
 	margin-bottom: 20px;
 }
 /*progressbar*/
@@ -91,21 +92,22 @@ body {
 	list-style-type: none;
 	color: white;
 	text-transform: uppercase;
-	font-size: 9px;
+	font-size: 11px;
 	width: 33.33%;
 	float: left;
 	position: relative;
+	font-weight: 600;
 }
 #progressbar li:before {
 	content: counter(step);
 	counter-increment: step;
-	width: 20px;
-	line-height: 20px;
+	width: 30px;
+	line-height: 30px;
 	display: block;
-	font-size: 10px;
-	color: #333;
-	background: white;
-	border-radius: 3px;
+	font-size: 14px;
+	color: #000;
+	background: #d3aaec;
+	border-radius: 10px;
 	margin: 0 auto 5px auto;
 }
 /*progressbar connectors*/
@@ -121,14 +123,11 @@ body {
 }
 #progressbar li:first-child:after {
 	/*connector not needed before the first step*/
-	content: none; 
+	content: none;
 }
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-	background: #27AE60;
-	color: white;
+	background: #9d00ff;
+	color: #ffffff;
 }
-
-
-

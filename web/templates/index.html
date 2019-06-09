@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="stylesheet" href="/static/icon/icon.css">
     <link rel="stylesheet" href="/static/fonts.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/static/js/login.js"></script>
   </head>
   <body>
     <header>
@@ -33,18 +35,18 @@
         </div>
       </div>
 
-      <div class="theClient">
+      <div class="theClient" id="barra_login">
         <div class="user line-input">
           <label class="lnr lnr-user"></label>
-          <input type="text" placeholder="Usuario" name="usuario">
+          <input type="text" placeholder="Email" name="email" id="email">
         </div>
 
         <div class="password line-input">
           <label class="lnr lnr-lock"></label>
-          <input type="password" placeholder="Contraseña" name="contrasena">
+          <input type="password" placeholder="Contraseña" name="password" id="password">
         </div>
-
-        <a href="{{ url_for('mapa') }}" class="button">Ingresar</a>
+        <!--<input type="button" value="Ingresar" onclick="getData()">-->
+        <a onclick="getData()" class="button">Ingresar</a>
       </div>
 
     </header>
@@ -64,7 +66,8 @@
             </button>
           </fieldset>
         </form>
-        <a href="{{ url_for('registro_cliente') }}" class="btn">Soy nuevo</a>
+        <a href="/static/client_register.html" class="btn">Soy nuevo cliente</a>
+        <a href="/static/business_register.html" class="btn">Soy nuevo proveedor</a>
       </div>
     </div>
     <div class="social">
