@@ -21,5 +21,9 @@ def mapa():
 def restaurant():
     return render_template('01.html')
 
+@app.route('/register_business.html')
+def register_restaurant():
+    return render_template('register_business.html')
+
 if __name__ == '__main__':
     app.run()
