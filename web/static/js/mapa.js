@@ -24,7 +24,7 @@ function initMap() {
     var markerContent = (restName) => {
       var cadena = ['<div class="info_content">' +
         '<h3>' + restName +'</h3>' + '<p>3 opciones de menú</p>'+
-        '<a href="/'+ restName.replace(/ /g, "") +'.html">Ver menu</a>'];
+        '<a href="/static/'+ restName.replace(/ /g, "") +'.html">Ver menu</a>'];
       return cadena;
     }
 
