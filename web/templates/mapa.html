@@ -14,12 +14,196 @@
         margin: 0;
         padding: 0;
       }
+
     </style>
   </head>
   <body>
+
+    <div id="style-selector-control"  class="map-control" style="display: none">
+      <select id="style-selector" class="selector-control">
+        <option value="hiding" selected="selected">Hide</option>
+      </select>
+    </div>
+
     <div id="map"></div>
     <script src="/static/js/mapa.js"></script>
+    <script>
+
+      function initMap() {
+        var map;
+
+        var limites = {
+        north: -12.133432,
+        south: -12.139371,
+        west: -77.022687,
+        east: -77.018599
+        };
+
+        var markers = [
+          ['UTEC - piso 2', -12.135601, -77.022506],
+          ['UTEC - Piso 6', -12.135486, -77.022223],
+          ['Salomé', -12.137139,  -77.020528],
+          ['Rincon Torrepa', -12.136653, -77.020507],
+          ['Menu de casa', -12.135239, -77.020970],
+          ['D Lucas', -12.135619, -77.021855],
+        ];
+
+        //InfoWindow de cada marcador
+        var infoWindowContent = [];
+
+        var markerContent = (restName) => {
+          var cadena = ['<div class="info_content">' +
+            '<h3>' + restName +'</h3>' + '<p>3 opciones de menú</p>'+
+            '<a href="/static/'+ restName.replace(/ /g, "") +'.html">Ver menu</a>'];
+          return cadena;
+        }
+
+        for (var i = 0; i < markers.length; i++) {
+          infoWindowContent.push(markerContent(markers[i][0]));
+        }
+
+        var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -12.136288, lng: -77.021351},
+          restriction: {
+            latLngBounds: limites,
+            strictBounds: false
+          },
+          zoom: 18,
+          disableDefaultUI: true,
+        });
+
+        var styleControl = document.getElementById('style-selector-control');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(styleControl);
+
+        var styleSelector = document.getElementById('style-selector');
+        map.setOptions({styles: styles[styleSelector.value]});
+
+        //Genera los marcadores con sus respectivos infoWindows
+        for( i = 0; i < markers.length; i++ ){
+          var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+          var marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: markers[i][0]
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent(infoWindowContent[i][0]);
+                infoWindow.open(map, marker);
+            }
+            })(marker, i));
+
+          marker.setMap(map);
+        }
+    }
+
+    var styles = {
+        default: null,
+        hiding: [
+          {
+            featureType: 'poi.business',
+            stylers: [{visibility: 'off'}]
+          },
+          {
+            featureType: 'transit',
+            elementType: 'labels.icon',
+            stylers: [{visibility: 'off'}]
+          },
+          {
+            featureType: 'poi',
+            elementType: 'labels.icon',
+            stylers: [{visibility: 'off'}]
+          },
+          {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+          {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+          {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+          {
+            featureType: 'administrative.locality',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#d59563'}]
+          },
+          {
+            featureType: 'poi',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#d59563'}]
+          },
+          {
+            featureType: 'poi.park',
+            elementType: 'geometry',
+            stylers: [{color: '#263c3f'}]
+          },
+          {
+            featureType: 'poi.park',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#6b9a76'}]
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: [{color: '#38414e'}]
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry.stroke',
+            stylers: [{color: '#212a37'}]
+          },
+          {
+            featureType: 'road',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#9ca5b3'}]
+          },
+          {
+            featureType: 'road.highway',
+            elementType: 'geometry',
+            stylers: [{color: '#746855'}]
+          },
+          {
+            featureType: 'road.highway',
+            elementType: 'geometry.stroke',
+            stylers: [{color: '#1f2835'}]
+          },
+          {
+            featureType: 'road.highway',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#f3d19c'}]
+          },
+          {
+            featureType: 'transit',
+            elementType: 'geometry',
+            stylers: [{color: '#2f3948'}]
+          },
+          {
+            featureType: 'transit.station',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#d59563'}]
+          },
+          {
+            featureType: 'water',
+            elementType: 'geometry',
+            stylers: [{color: '#17263c'}]
+          },
+          {
+            featureType: 'water',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#515c6d'}]
+          },
+          {
+            featureType: 'water',
+            elementType: 'labels.text.stroke',
+            stylers: [{color: '#17263c'}]
+          }
+        ]
+    };
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQRX8FfBoalPcHvneCcau7Zk3ySoiecc0&callback=initMap"
     async defer></script>
+
   </body>
 </html>
