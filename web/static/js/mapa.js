@@ -44,6 +44,8 @@ function initMap() {
       disableDefaultUI: true
     });
 
+    map.setOptions({styles: styles['default']});
+
     //Genera los marcadores con sus respectivos infoWindows
     for( i = 0; i < markers.length; i++ ){
       var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
@@ -62,5 +64,20 @@ function initMap() {
 
       marker.setMap(map);
     }
-  }
-  google.maps.event.addDomListener(window, 'load', initialize);
+}
+
+var styles = {
+        default: [
+            {
+            featureType: 'poi.business',
+            stylers: [{visibility: 'off'}]
+          },
+          {
+            featureType: 'transit',
+            elementType: 'labels.icon',
+            stylers: [{visibility: 'off'}]
+          }
+        ],
+};
+
+google.maps.event.addDomListener(window, 'load', initialize);
