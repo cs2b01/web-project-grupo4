@@ -41,11 +41,11 @@ def get_client(id):
 def create_test_clients():
     db_session = db.getSession(engine)
     user = entities.Client(
-        username="piero16301",
+        username="angelinux",
         password="123456",
-        name="Piero",
-        fullname="Morales",
-        phone="947861220",
+        name="Angel",
+        fullname="Motta",
+        phone="948712638",
         address="Santiago de Surco, Lima")
     db_session.add(user)
     db_session.commit()
