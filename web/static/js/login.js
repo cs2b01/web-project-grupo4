@@ -1,5 +1,4 @@
 function getData() {
-    $('#action').html('Autenticando...');
     var email = $('#email').val();
     var password = $('#password').val();
     var message = JSON.stringify({
@@ -18,12 +17,11 @@ function getData() {
         },
         error: function (response) {
             if (response['status'] == 401) {
-                //document.getElementById("barra_login").style.display = "none";
-                $('#action').html('<a>Sesión iniciada</a>')
+                alert('Datos incorrectos');
+                print('Sesión no iniciada');
             } else {
-                //document.getElementById("barra_login").style.display = "none";
-                $('#action').html('<a>Usuario y/o contraseña incorrectos</a>');
-                //document.getElementById("barra_login").style.display = "inline";
+                alert('Sesión iniciada');
+                print('Sesión iniciada');
             }
         }
     });

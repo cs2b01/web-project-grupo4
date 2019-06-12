@@ -5,7 +5,7 @@ from database import connector
 class Client(connector.Manager.Base):
     __tablename__ = 'client'
     id = Column(Integer, Sequence('client_id_seq'), primary_key=True)
-    email = Column(String(12))
+    username = Column(String(30))
     password = Column(String(12))
     name = Column(String(50))
     fullname = Column(String(50))

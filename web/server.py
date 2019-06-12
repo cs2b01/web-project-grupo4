@@ -41,7 +41,7 @@ def get_client(id):
 def create_test_clients():
     db_session = db.getSession(engine)
     user = entities.Client(
-        email="sanjuan.pama@gmail.com",
+        username="piero16301",
         password="123456",
         name="Piero",
         fullname="Morales",
@@ -55,7 +55,7 @@ def create_test_clients():
 def create_client():
     client = json.loads(request.form['values'])
     user = entities.Client(
-        email=client['email'],
+        username=client['username'],
         password=client['password'],
         name=client['name'],
         fullname=client['fullname'],
@@ -67,19 +67,21 @@ def create_client():
     session.commit()
     return 'Client created!'
 
-@app.route('/authenticate', methods=['POST'])
+@app.route('/authenticate', methods = ["POST"])
 def authenticate():
-    time.sleep(1)
+    time.sleep(2)
     message = json.loads(request.data)
-    email = message['email']
+    username = message['username']
     password = message['password']
+
     db_session = db.getSession(engine)
     try:
         user = db_session.query(entities.Client
-            ).filter(entities.Client.email == email
+            ).filter(entities.Client.username == username
             ).filter(entities.Client.password == password
             ).one()
         message = {'message': 'Authorized'}
+        """ session['logged'] = user.id """
         return Response(message, status=200, mimetype='application/json')
     except Exception:
         message = {'message': 'Unauthorized'}

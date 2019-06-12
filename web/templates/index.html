@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/static/icon/icon.css">
     <link rel="stylesheet" href="/static/fonts/fonts.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write(decodeURIComponent('%3Cscript src="js/jquery-3.1.0.min.js"%3E%3C/script%3E'))</script>
     <script src="/static/js/login.js"></script>
   </head>
   <body>
@@ -41,7 +42,7 @@
       <div class="theClient" id="barra_login">
         <div class="user line-input">
           <label class="lnr lnr-user"></label>
-          <input type="text" placeholder="Email" name="email" id="email">
+          <input type="text" placeholder="Usuario" name="username" id="username">
         </div>
 
         <div class="password line-input">
@@ -49,7 +50,7 @@
           <input type="password" placeholder="Contraseña" name="password" id="password">
         </div>
         <!--<input type="button" value="Ingresar" onclick="getData()">-->
-        <a onclick="getData()" class="button">Ingresar</a>
+        <button type="button" value="Login" class="button" onclick="getDatos()">Ingresar</button>
       </div>
 
     </header>
@@ -75,8 +76,8 @@
     </div>
     <div class="social">
       <ul>
-        <li><a href="http://www" target="_blank" class="icon-facebook"></a></li>
-        <li><a href="http://www" target="_blank" class="icon-twitter"></a></li>
+        <li><a href="/create_test_clients" target="_blank" class="icon-facebook"></a></li>
+        <li><a href="/clients" target="_blank" class="icon-twitter"></a></li>
         <li><a href="http://www" target="_blank" class="icon-instagram"></a></li>
         <li><a href="http://www" target="_blank" class="icon-play"></a></li>
         <li><a href="http://www" target="_blank" class="icon-android"></a></li>
@@ -89,5 +90,39 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="/static/js/script.js"></script>
+
+    <script>
+
+
+      function getDatos(){
+        alert('Autenticando');
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var message = JSON.stringify({
+                "username": username,
+                "password": password
+            });
+        $.ajax({
+            url:'/authenticate',
+            type:'POST',
+            contentType: 'application/json',
+            data : message,
+            dataType:'json',
+            success: function(response){
+              alert('Sesión iniciada');
+            },
+            error: function(response){
+                if(response['status']==401){
+                    alert('Sesión no iniciada');
+                }
+                else{
+                    alert('Sesión iniciada');
+                }
+            }
+        });
+      }
+
+    </script>
+
   </body>
 </html>
