@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Bienvenido a Netchmap</title>
     <link rel="icon" href="/static/images/icono.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-    integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
-    crossorigin="anonymous">
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+          crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="stylesheet" href="/static/icon/icon.css">
@@ -14,94 +14,94 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>window.jQuery || document.write(decodeURIComponent('%3Cscript src="js/jquery-3.1.0.min.js"%3E%3C/script%3E'))</script>
     <script src="/static/js/login.js"></script>
-  </head>
-  <body>
-    <header>
-      <div class="nav">
+</head>
+<body>
+<header>
+    <div class="nav">
 
         <div class="wrap">
-          <nav>
-            <ul>
-              <li>
-                <a href="#">Resumen</a>
-              </li>
-              <li>
-                <a href="#">Atención al cliente</a>
-              </li>
-              <li>
-                <a href="#">Contáctanos</a>
-              </li>
-              <li>
-                <a href="/static/mapa.html">Restaurantes</a>
-              </li>
-            </ul>
-          </nav>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#">Resumen</a>
+                    </li>
+                    <li>
+                        <a href="#">Atención al cliente</a>
+                    </li>
+                    <li>
+                        <a href="#">Contáctanos</a>
+                    </li>
+                    <li>
+                        <a href="/static/mapa.html">Restaurantes</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-      </div>
+    </div>
 
-      <div class="theClient" id="barra_login">
+    <div class="theClient" id="barra_login">
         <div class="user line-input">
-          <label class="lnr lnr-user"></label>
-          <input type="text" placeholder="Usuario" name="username" id="username">
+            <label class="lnr lnr-user"></label>
+            <input type="text" placeholder="Usuario" name="username" id="username">
         </div>
 
         <div class="password line-input">
-          <label class="lnr lnr-lock"></label>
-          <input type="password" placeholder="Contraseña" name="password" id="password">
+            <label class="lnr lnr-lock"></label>
+            <input type="password" placeholder="Contraseña" name="password" id="password">
         </div>
         <!--<button type="button" value="Login" class="button" onclick="getDatos()">Ingresar</button>-->
         <a class="button" onclick="getDatos()">Ingresar</a>
         <a></a>
-      </div>
+    </div>
 
-    </header>
-    <div class="header content">
-      <div class="header-video">
+</header>
+<div class="header content">
+    <div class="header-video">
         <video src="/static/video/maps_video.mp4" autoplay muted loop width="100%"></video>
-      </div>
-      <div class="header-overlay"></div>
+    </div>
+    <div class="header-overlay"></div>
 
-      <div class="header-content">
+    <div class="header-content">
         <h1>Netchmap</h1>
         <form>
-          <fieldset>
-            <input type="search" placeholder="¿Qué estás buscando?">
-            <button type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-          </fieldset>
+            <fieldset>
+                <input type="search" placeholder="¿Qué estás buscando?">
+                <button type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </fieldset>
         </form>
         <a href="/static/client_register.html" class="btn">Soy nuevo cliente</a>
         <a href="/static/business_register.html" class="btn">Soy nuevo proveedor</a>
-      </div>
     </div>
-    <div class="social">
-      <ul>
-        <li><a href="/create_test_clients" target="_blank" class="icon-facebook"></a></li>
-        <li><a href="/clients" target="_blank" class="icon-twitter"></a></li>
+</div>
+<div class="social">
+    <ul>
+        <li><a href="http://www" target="_blank" class="icon-facebook"></a></li>
+        <li><a href="http://www" target="_blank" class="icon-twitter"></a></li>
         <li><a href="http://www" target="_blank" class="icon-instagram"></a></li>
         <li><a href="http://www" target="_blank" class="icon-play"></a></li>
         <li><a href="http://www" target="_blank" class="icon-android"></a></li>
         <li><a href="http://www" target="_blank" class="icon-appleinc"></a></li>
-        <li><a href="mailto:" target="_blank" class="icon-mail2"></a></li>
-      </ul>
-    </div>
+        <li><a href="/clients" id="settings" target="_blank" class="icon-connection" style="display: none"></a></li>
+    </ul>
+</div>
 
-    <i class="fas fa-ellipsis-v btn-menu"></i>
+<i class="fas fa-ellipsis-v btn-menu"></i>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="/static/js/script.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/static/js/script.js"></script>
 
-    <script>
+<script>
 
-      function getDatos(){
+    function getDatos(){
         alert('Autenticando');
         var username = $('#username').val();
         var password = $('#password').val();
         var message = JSON.stringify({
-                "username": username,
-                "password": password
-            });
+            "username": username,
+            "password": password
+        });
         $.ajax({
             url:'/authenticate',
             type:'POST',
@@ -109,20 +109,26 @@
             data : message,
             dataType:'json',
             success: function(response){
-              alert('Sesión iniciada');
+
             },
             error: function(response){
                 if(response['status']==401){
-                    alert('Sesión no iniciada');
+                    alert('Error en los datos, inténtalo nuevamente');
                 }
                 else{
-                    alert('Sesión iniciada');
+                    if(response['status']==300){
+                        alert('Sesión iniciada como administrador');
+                        document.getElementById("settings").style.display = "inline";
+                    } else{
+                        alert('Sesión iniciada como usuario');
+                    }
+                    document.getElementById("barra_login").style.display = "none";
                 }
             }
         });
-      }
+    }
 
-    </script>
+</script>
 
-  </body>
+</body>
 </html>

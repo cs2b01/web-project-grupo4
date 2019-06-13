@@ -79,16 +79,25 @@ def authenticate():
 
     db_session = db.getSession(engine)
     try:
-        user = db_session.query(entities.Client
-            ).filter(entities.Client.username == username
-            ).filter(entities.Client.password == password
-            ).one()
-        message = {'message': 'Authorized'}
-        """ session['logged'] = user.id """
-        return Response(message, status=200, mimetype='application/json')
+        if username == "piero16301" or "angelinux" or "THEFLILUX":
+            user = db_session.query(entities.Client
+                   ).filter(entities.Client.username == username
+                   ).filter(entities.Client.password == password
+                   ).one()
+            message = {'message': 'Admin_auth'}
+            return Response(message, status=300, mimetype='application/json')
+
     except Exception:
-        message = {'message': 'Unauthorized'}
-        return Response(message, status=401, mimetype='application/json')
+        try:
+            user = db_session.query(entities.Client
+                   ).filter(entities.Client.username == username
+                   ).filter(entities.Client.password == password
+                   ).one()
+            message = {'message': 'User_auth'}
+            return Response(message, status=100, mimetype='application/json')
+        except Exception:
+            message = {'message': 'Unauthorized'}
+            return Response(message, status=401, mimetype='application/json')
 
 @app.route('/clients', methods=['PUT'])
 def update_client():
