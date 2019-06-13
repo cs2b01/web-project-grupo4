@@ -57,19 +57,13 @@ def create_client():
     time.sleep(2)
     db_session = db.getSession(engine)
     message = json.loads(request.data)
-    username = message['username']
-    password = message['password']
-    name = message['name']
-    fullname = message['fullname']
-    phone = message['phone']
-    address = message['address']
     user = entities.Client(
-        username=username,
-        password=password,
-        name=name,
-        fullname=fullname,
-        phone=phone,
-        address=address
+        username=message['username'],
+        password=message['password'],
+        name=message['name'],
+        fullname=message['fullname'],
+        phone=message['phone'],
+        address=message['address']
     )
     db_session.add(user)
     db_session.commit()
