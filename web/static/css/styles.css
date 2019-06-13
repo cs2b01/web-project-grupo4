@@ -12,13 +12,13 @@
     width: 100%;
     background: #222;
     color: white;
-    padding: 0 20px;
+    padding: 0px 0px 0px 0px;
     transition: 0.3s ease all;
     backface-visibility: hidden;
     transform: translate3d(0,0,0);
     -webkit-transform: translate3d(0,0,0);
   }
-  
+
   .theClient{
     display: flex;
     position: absolute;
@@ -27,74 +27,77 @@
     top: 20px;
     list-style: none;
   }
-  
+
   .line-input{
     margin-right: 30px;
     position: relative;
     outline: none;
   }
-  
+
   .line-input:hover{
     border-bottom: 2px solid #fff;
   }
-  
+
   .line-input input{
     outline: none;
   }
-  
+
   .line-input label{
     position: relative;
     font-size: 17px;
     top: 3px;
     font-weight: bold;
   }
-  
+
   .border-input{
     border-bottom: 2px solid #c44569;
   }
-  
+
   /*INICIA: Boton 'Ingresar'*/
   .button{
     display: flex;
     position: relative;
     padding-left: 1.2rem;
+    padding-right: 1.2rem;
     width: 100px;
     height: 30px;
     bottom: 3px;
-    border-radius: 50px;
+    right: 15px;
+    border-radius: 40px;
     outline: none;
     color: white;
     background: #c44569;
     border-style: none;
     font-weight: bold;
+    font-family: sans-serif;
     cursor: pointer;
   }
-  
+
   .button:hover{
     opacity: .8;
   }
   /*INICIA: Boton 'Ingresar'*/
-  
+
   .nav .wrap{
     position: relative;
     transition: 0.4s ease all;
   }
-  
+
   nav{
     display: inline-block;
   }
-  
+
   nav ul{
     margin: 0;
     padding: 0;
   }
-  
+
   nav li{
     margin: 0;
     padding: 0;
     display: inline-block;
   }
-  
+
   nav a{
     display: block;
     padding: 20px;
@@ -103,13 +106,14 @@
     text-decoration: none;
     transition: 0.2s ease all;
     font-weight: bold;
+    font-family: sans-serif;
   }
-  
+
   nav a:hover{
     color: white;
     background: #c44569;
   }
-  
+
   body{
     margin: 0;
     font-size: 1rem;
@@ -118,14 +122,14 @@
     overflow-x: hidden;
     overflow-y: hidden;
   }
-  
+
   .header{
     height: 90vh;
     display: flex;
     align-items: center;
     color: #fff;
   }
-  
+
   .content{
     max-width: 40rem;
     padding-left: 1rem;
@@ -133,7 +137,7 @@
     margin: auto;
     text-align: center;
   }
-  
+
   .header-video{
     position: absolute;
     top: 64px;
@@ -142,12 +146,12 @@
     height: 90vh;
     overflow: hidden;
   }
-  
+
   .header-video video{
     min-width: 100%;
     min-height: 100%;
   }
-  
+
   .header-overlay{
     height: 100%;
     width: 100%;
@@ -158,22 +162,22 @@
     z-index: 1;
     opacity: .85;
   }
-  
+
   .header-content{
     z-index: 2;
   }
-  
+
   .header-content h1{
     font-size: 70px;
     margin-bottom: 0;
     font-family: 'Lobster', cursive;
   }
-  
+
   .header-content form{
     width: 630px;
     margin: 0 auto;
   }
-  
+
   .header-content form fieldset{
     display: inline-block;
     background: #fff;
@@ -181,7 +185,7 @@
     border-radius: 5px;
     -webkit-box-shadow: 5px 5px 3px #252525;
   }
-  
+
   .header-content form fieldset input, button{
     position: relative;
     float: left;
@@ -190,13 +194,13 @@
     height: 50px;
     padding: 0;
   }
-  
+
   .header-content form fieldset input{
     color: #666;
     border: none;
     z-index: 2;
   }
-  
+
   .header-content form fieldset button{
     font-size: 15px;
     width: 50px;
@@ -206,33 +210,33 @@
     transition-duration: .3s;
     outline: none;
   }
-  
+
   .fa-search{
     color: #bbb;
     transform: translate(-400px,0);
     transition: all .1s ease-in-out;
   }
-  
+
   .header-content form fieldset input:focus{
     outline: none;
   }
-  
+
   .header-content form fieldset input:focus + button{
     transform: translate(0,0);
     transition-duration: .3s;
     -webkit-box-shadow: 5px 6px 3px #252525;
   }
-  
+
   .header-content form fieldset input:focus + button:hover{
     cursor: pointer;
   }
-  
+
   .header-content form fieldset input:focus + button .fa-search{
     color: #fff;
     transform: translate(0,0);
     transition-duration: .4s;
   }
-  
+
   /*INICIA:  Boton 'Soy Nuevo'*/
   .btn{
     position: relative;
@@ -243,6 +247,8 @@
     top: 30px;
     text-decoration: none;
     border-radius: 50px;
+    font-family: sans-serif;
+    font-weight: 600;
   }
   
   .btn:hover{

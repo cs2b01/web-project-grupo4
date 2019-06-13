@@ -46,26 +46,35 @@ def create_test_clients():
         name="Angel",
         fullname="Motta",
         phone="948712638",
-        address="Santiago de Surco, Lima")
+        address="Santiago de Surco, Lima"
+    )
     db_session.add(user)
     db_session.commit()
     return "Test client created!"
 
 @app.route('/clients', methods=['POST'])
 def create_client():
-    client = json.loads(request.form['values'])
+    time.sleep(2)
+    db_session = db.getSession(engine)
+    message = json.loads(request.data)
+    username = message['username']
+    password = message['password']
+    name = message['name']
+    fullname = message['fullname']
+    phone = message['phone']
+    address = message['address']
     user = entities.Client(
-        username=client['username'],
-        password=client['password'],
-        name=client['name'],
-        fullname=client['fullname'],
-        phone=client['phone'],
-        address=client['address']
+        username=username,
+        password=password,
+        name=name,
+        fullname=fullname,
+        phone=phone,
+        address=address
     )
-    session = db.getSession(engine)
-    session.add(user)
-    session.commit()
-    return 'Client created!'
+    db_session.add(user)
+    db_session.commit()
+    message = {'message': 'Registered'}
+    return Response(message, status=200, mimetype='application/json')
 
 @app.route('/authenticate', methods = ["POST"])
 def authenticate():

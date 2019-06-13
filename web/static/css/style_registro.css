@@ -81,6 +81,12 @@ body {
 	color: #333333;
 	margin-bottom: 20px;
 }
+.fs-downtext {
+	font-weight: bolder;
+	font-size: 16px;
+	color: #333333;
+	margin-bottom: 20px;
+}
 /*progressbar*/
 #progressbar {
 	margin-bottom: 30px;

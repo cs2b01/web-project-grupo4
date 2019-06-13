@@ -6,11 +6,11 @@ class Client(connector.Manager.Base):
     __tablename__ = 'client'
     id = Column(Integer, Sequence('client_id_seq'), primary_key=True)
     username = Column(String(30))
-    password = Column(String(12))
+    password = Column(String(30))
     name = Column(String(50))
     fullname = Column(String(50))
-    phone = Column(String(10))
-    address = Column(String(50))
+    phone = Column(String(20))
+    address = Column(String(200))
 
 class Provider(connector.Manager.Base):
     __tablename__ = 'provider'
