@@ -74,14 +74,15 @@
         dataType:'json',
         success: function(response){
             alert("Tu negocio ha sido registrado");
-            alert(JSON.stringify(response));
+            //alert(JSON.stringify(response));
+            window.location.href="/static/index.html";
             //$('#allmessages').html("");
             //$('#action').html(response['statusText']);
         },
         error: function(response){
             alert("Error en registro");
-            alert(JSON.stringify(response));
-            //alert("Error: Mensaje no enviado");
+            //alert(JSON.stringify(response));
+            window.location.href="/static/business_register.html";
             //$('#action').html(response['statusText']);
         }
     });
