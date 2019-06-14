@@ -38,7 +38,7 @@
     <textarea name="address" placeholder="Dirección"></textarea>
     <textarea name="slogan" placeholder="Slogan/Lema"></textarea>
     <input type="button" name="previous_d" class="previous action-button" value="Atrás" />
-    <input type="submit" id="sendform" name="sendt" class="submit action-button" value="Finalizar" />
+    <input type="button" name="next" class="next action-button" value="Siguiente" />
   </fieldset>
 
   <fieldset>
@@ -46,14 +46,15 @@
     <h3 class="fs-subtitle">de ingresar a la comunidad de emprendedores NETCHMAP</h3>
     <br/>
     <br/>
-    <h4 class="fs-downtext">Cuando tu ciudad es más inteligente, todo tenemos un mejor lugar para vivir. Unete a la comunidad de emprendedores Netchmap y ayudanos a construir cada día una ciudad más inteligente, donde las personas pueden acceder a más servicios y tomar mejores decisiones</h4>
+    <h4 class="fs-downtext">Cuando tu ciudad es más inteligente, todo tenemos un mejor lugar para vivir. Unete a la comunidad de emprendedores Netchmap y ayudanos a construir cada día una ciudad más inteligente. NETCHMAP donde las personas pueden acceder a más servicios y tomar mejores decisiones</h4>
     <br/>
     <br/>
+    <input type="button" name="previous_d" class="previous action-button" value="Atrás" />
+    <input type="submit" id="sendform" name="sendt" class="submit action-button" value="Finalizar" />
   </fieldset>
 </form>
 <script>
   $(document).ready(function() {
-    console.log("Previo");
     $( "#msform" ).submit(function( event ) {
       console.log( $( this ).serializeArray() );
 	  var data_form = $( this ).serializeArray();
@@ -71,7 +72,7 @@
         contentType:'application/json',
         data : data_json_form,
         dataType:'json',
-        success: function(){
+        success: function(response){
             alert("Tu negocio ha sido registrado");
             alert(JSON.stringify(response));
             //$('#allmessages').html("");
