@@ -121,5 +121,37 @@ def delete_client():
     session.commit()
     return 'Client deleted!'
 
+## Methods Restaurants ##
+@app.route('/restaurantes', methods=['POST'])
+def create_restarante():
+    db_session = db.getSession(engine)
+    message = json.loads(request.data)
+    #print(message)
+    restaurante = entities.Restaurante(
+        name_fullname=message['nombre'],
+        username=message['correo'],
+        phone=message['telefono'],
+        password=message['pass'],
+        name_restaurant=message['restaurante'],
+        num_mesas=message['num_mesas'],
+        address=message['address'],
+        slogan=message['slogan']
+    )
+    db_session.add(restaurante)
+    db_session.commit()
+    response = {'message': 'Restaurante registered'}
+    return Response(json.dumps(response, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
+
+@app.route('/restaurantes', methods = ['GET'])
+def get_restaurantes():
+    session = db.getSession(engine)
+    dbResponse = session.query(entities.Restaurante)
+    data = []
+    for restaurante in dbResponse:
+        data.append(restaurante)
+    return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
+
+## End Methods Resturants ##
+
 if __name__ == '__main__':
     app.run()
