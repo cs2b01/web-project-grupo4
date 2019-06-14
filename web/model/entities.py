@@ -23,3 +23,15 @@ class Provider(connector.Manager.Base):
     num_mesas = Column(Integer)
     address = Column(String(50))
     slogan = Column(String(20))
+
+class Restaurante(connector.Manager.Base):
+    __tablename__ = 'restaurante'
+    id = Column(Integer, Sequence('restaurante_id_seq'), primary_key=True)
+    name_fullname = Column(String(60))
+    username = Column(String(30))
+    phone = Column(String(10))
+    password = Column(String(15))
+    name_restaurant = Column(String(30))
+    num_mesas = Column(Integer)
+    address = Column(String(50))
+    slogan = Column(String(20))
