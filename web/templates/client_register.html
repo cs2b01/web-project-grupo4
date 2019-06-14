@@ -83,17 +83,12 @@
             data : message,
             dataType:'json',
             success: function(response){
-
+                alert('Ahora inicia sesión');
+                window.location.href="/static/index.html";
             },
             error: function(response){
-                if(response['status']==200){
-                    alert('Ahora inicia sesión');
-                    window.location.href="/static/index.html";
-                }
-                else{
-                    alert('Inténtalo nuevamente');
-                    window.location.href="/static/client_register.html";
-                }
+                alert('Inténtalo nuevamente');
+                window.location.href="/static/client_register.html";
             }
         });
     }

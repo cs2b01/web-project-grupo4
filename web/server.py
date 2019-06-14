@@ -68,7 +68,8 @@ def create_client():
     db_session.add(user)
     db_session.commit()
     message = {'message': 'Registered'}
-    return Response(message, status=200, mimetype='application/json')
+    #return Response(message, status=200, mimetype='application/json')
+    return Response(json.dumps(message, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
 
 @app.route('/authenticate', methods = ["POST"])
 def authenticate():
