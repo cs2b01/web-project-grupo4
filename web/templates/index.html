@@ -71,8 +71,10 @@
                 </button>
             </fieldset>
         </form>
-        <a href="/static/client_register.html" class="btn">Soy nuevo cliente</a>
-        <a href="/static/business_register.html" class="btn">Soy nuevo proveedor</a>
+        <div id="soy_nuevo">
+            <a href="/static/client_register.html" class="btn">Soy nuevo cliente</a>
+            <a href="/static/business_register.html" class="btn">Soy nuevo proveedor</a>
+        </div>
     </div>
 </div>
 <div class="social">
@@ -123,6 +125,7 @@
                         alert('Sesión iniciada como usuario');
                     }
                     document.getElementById("barra_login").style.display = "none";
+                    document.getElementById("soy_nuevo").style.display = "none";
                 }
             }
         });
