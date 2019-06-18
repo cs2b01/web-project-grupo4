@@ -165,9 +165,9 @@ def show_restaurant(rest):
 
 @app.route('/restaurant', methods=['GET'])
 def get_restaurant():
-    session = db.getSession(engine)
-    dbResponse = session.query(entities.Restaurante)
-    return render_template('restaurant.html')
+    db_session = db.getSession(engine)
+    restaurant = db_session.query(entities.Restaurante).filter(entities.Restaurante.id == res_id).one()
+    return Response(json.dumps(restaurant, cls=connector.AlchemyEncoder), mimetype='application/json')
 
 
 @app.route('/add_menu/', methods=['GET'])
@@ -175,8 +175,8 @@ def add_menu():
     db_session = db.getSession(engine)
     plate = entities.Menu(
         restaurant_id=1,
-        tipo_plato="entrada",
-        name="Tequeños"
+        tipo_plato="segundo",
+        name="Arroz con mariscos"
     )
     db_session.add(plate)
     db_session.commit()
