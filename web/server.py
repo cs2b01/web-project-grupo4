@@ -192,8 +192,12 @@ def get_menu():
         data.append(item)
     return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
 
-
 ## End Methods Resturants ##
+
+## Menu methods ##
+
+
+## End Menu methods ##
 
 if __name__ == '__main__':
     app.run()
