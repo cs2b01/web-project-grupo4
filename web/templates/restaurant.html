@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/static/images/icono.ico">
+    <link rel="stylesheet" href="/static/css/place.css">
+    <link rel="stylesheet" href="/static/css/icons/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>Restaurant</title>
+</head>
+<body onload="get_menu()">
+    <div class="header">
+        <div class="name"></div>
+        <div class="options"></div>
+    </div>
+    <main>
+        <section class="contenedor">
+            <div class="first">
+                <div class="image">
+                    <div class="restaurant">
+                        <h1>Rincón Torrepa</h1>
+                    </div>
+                </div>
+                <div class="descp">
+                    <p class="info">Información</p>
+                    <p id="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam
+                        necessitatibus inventore doloribus tempora aperiam est beatae amet
+                        enim asperiores sint?</p>
+                    <p class="subtitle">Rating</p>
+                    <div class="rating">
+                        <i class="icon icon-star-full"></i>
+                        <i class="icon icon-star-full"></i>
+                        <i class="icon icon-star-full"></i>
+                        <i class="icon icon-star-empty"></i>
+                        <i class="icon icon-star-empty"></i>
+                    </div>
+                    <div id="contact">
+                        <p class="line"><i class="icon icon-phone"></i> Teléfono <a href="tel:+51#">+51 </a></p>
+                        <p class="line"><i class="icon icon-mail2"></i> Email <a href="mailto:#">rincon@correo.com</a></p>
+                        <p class="line"><i class="icon icon-earth"></i> Web <a href="www.sitio.com">www.sitio.com</a></p>
+                        <p class="line"><i class="icon icon-users"></i> Capacidad 30 personas</p>
+                    </div>
+                    <span class="linea"></span>                    
+                </div>
+            </div>
+            <div class="second">
+                <div class="descp">
+                    <p class="info">Menú</p>
+                    <p class="subtitle">Entradas</p>
+                    <ul id="entradas">
+                        <!--Entradas-->
+                    </ul>
+                    <p class="subtitle">Segundos</p>
+                    <ul id="segundos">
+                        <li>Seco norteño</li>
+                        <li>Lomo saltado</li>
+                        <li>Asado de res</li>
+                        <li>Olluquito con carne</li>
+                        <li>Arroz con mariscos</li> 
+                        <!--<li>Escabeche de pescado</li>-->
+                    </ul>
+                    <span class="linea"></span>
+                </div>
+                <br>
+            </div>
+        </section>
+    </main>
+    <section class="baner">
+            <p>Disfruta más con </p><span> Netchmap</span>
+        </section>
+    <script>
+        function get_menu() {
+            $.ajax({
+                url:'/menu',
+                type:'GET',
+                contentType: 'application/json',
+                dataType:'json',
+                success: function(response){
+                    $.each(response,function (index,value) {
+                        if (response[index]['tipo_plato'] === "segundo"){
+                            $('#segundos').append('<li>'+value.name+'</li>');
+                        } else if (response[index]['tipo_plato'] === "entrada"){
+                            $('#entradas').append('<li>'+value.name+'</li>');
+                        }
+                    })
+                },
+                error: function(error){
+                    alert(JSON.stringify(error));
+                }
+            });
+        }
+
+        function get_restaurant() {
+            $.ajax({
+                url:'/menu',
+                type:'GET',
+                contentType: 'application/json',
+                dataType:'json',
+                success: function(response){
+                    $.each(response,function (index,value) {
+                        if (response[index]['tipo_plato'] === "segundo"){
+                            $('#segundos').append('<li>'+value.name+'</li>');
+                        } else if (response[index]['tipo_plato'] === "entrada"){
+                            $('#entradas').append('<li>'+value.name+'</li>');
+                        }
+                    })
+                },
+                error: function(response){
+                    alert(JSON.stringify(response));
+                }
+            });
+        }
+
+    </script>
+
+</body>
+</html>
