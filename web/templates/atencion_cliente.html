@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-image: url(/static/images/fondo_negro.jpeg)">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style_registro.css">
     <title>Netchmap</title>
 </head>
 <body>
+    <form id="msform">
 
+        <fieldset>
+            <h2 class="fs-title">Atencion al cliente</h2>
+            <h3 class="fs-subtitle">¿Tienes algun problema? Cuentanos que ocurre para poder ayudarte</h3>
+            <input type="text" name="subject" id="subject" placeholder="Asunto" />
+            <input type="text" name="message" id="message" placeholder="Mensaje" />
+            <input type="button" name="send" class="send action-button" value="Enviar" onclick="getReclamo()"/>
+        </fieldset>
+
+    </form>
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script>
+
+        function getReclamo(){
+            var subject = $('#subject').val();
+            var message = $('#message').val();
+            var reclamo = JSON.stringify({
+                "subject": subject,
+                "message": message
+            });
+            $.ajax({
+                url:'/soporte',
+                type:'POST',
+                contentType: 'application/json',
+                data : reclamo,
+                dataType:'json',
+                success: function(response){
+                    alert('Email enviado');
+                    return response
+                },
+                error: function(error){
+                    alert('No se puede mandar el email');
+                    return error
+                }
+            });
+        }
+
+</script>
 </body>
 </html>
