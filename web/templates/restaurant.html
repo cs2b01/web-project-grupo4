@@ -10,7 +10,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <title>Restaurant</title>
 </head>
-<body onload="get_menu()">
+<body onload="cargar_datos()">
     <div class="header">
         <div class="name"></div>
         <div class="options"></div>
@@ -20,14 +20,14 @@
             <div class="first">
                 <div class="image">
                     <div class="restaurant">
-                        <h1>Rincón Torrepa</h1>
+                        <h1></h1>
                     </div>
                 </div>
                 <div class="descp">
-                    <p class="info">Información</p>
-                    <p id="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam
-                        necessitatibus inventore doloribus tempora aperiam est beatae amet
-                        enim asperiores sint?</p>
+                    <p class="info">Slogan</p>
+                    <p id="slogan">
+
+                    </p>
                     <p class="subtitle">Rating</p>
                     <div class="rating">
                         <i class="icon icon-star-full"></i>
@@ -37,10 +37,10 @@
                         <i class="icon icon-star-empty"></i>
                     </div>
                     <div id="contact">
-                        <p class="line"><i class="icon icon-phone"></i> Teléfono <a href="tel:+51#">+51 </a></p>
-                        <p class="line"><i class="icon icon-mail2"></i> Email <a href="mailto:#">rincon@correo.com</a></p>
-                        <p class="line"><i class="icon icon-earth"></i> Web <a href="www.sitio.com">www.sitio.com</a></p>
-                        <p class="line"><i class="icon icon-users"></i> Capacidad 30 personas</p>
+                        <p class="line"><i class="icon icon-phone"></i><span id="phone"></span></p>
+                        <p class="line"><i class="icon icon-mail2"></i><span id="mail"></span></p>
+                        <p class="line"><i class="icon icon-earth"></i><span id="adress"></span></p>
+                        <p class="line"><i class="icon icon-users"></i> Capacidad <span id="mesas"></span> mesas</p>
                     </div>
                     <span class="linea"></span>                    
                 </div>
@@ -50,16 +50,11 @@
                     <p class="info">Menú</p>
                     <p class="subtitle">Entradas</p>
                     <ul id="entradas">
-                        <!--Entradas-->
+
                     </ul>
                     <p class="subtitle">Segundos</p>
                     <ul id="segundos">
-                        <li>Seco norteño</li>
-                        <li>Lomo saltado</li>
-                        <li>Asado de res</li>
-                        <li>Olluquito con carne</li>
-                        <li>Arroz con mariscos</li> 
-                        <!--<li>Escabeche de pescado</li>-->
+
                     </ul>
                     <span class="linea"></span>
                 </div>
@@ -68,9 +63,14 @@
         </section>
     </main>
     <section class="baner">
-            <p>Disfruta más con </p><span> Netchmap</span>
+            <p>Disfruta más con Netchmap</p>
         </section>
     <script>
+        function cargar_datos() {
+            get_restaurant();
+            get_menu();
+        }
+
         function get_menu() {
             $.ajax({
                 url:'/menu',
@@ -94,21 +94,21 @@
 
         function get_restaurant() {
             $.ajax({
-                url:'/menu',
+                url:'/restaurant',
                 type:'GET',
                 contentType: 'application/json',
                 dataType:'json',
                 success: function(response){
-                    $.each(response,function (index,value) {
-                        if (response[index]['tipo_plato'] === "segundo"){
-                            $('#segundos').append('<li>'+value.name+'</li>');
-                        } else if (response[index]['tipo_plato'] === "entrada"){
-                            $('#entradas').append('<li>'+value.name+'</li>');
-                        }
-                    })
+                    //alert(response["name_restaurant"]);
+                    $('h1').text(response["name_restaurant"]);
+                    $('#slogan').text(response["slogan"]);
+                    $('#phone').html(' Teléfono <a href="tel:+51'+response['phone']+'">+51 '+response['phone']+'</a>');
+                    $('#mail').html(' Email <a href="mailto:'+response['username']+'">'+response['username']+'</a>')
+                    $('#adress').html(' Dirección '+response['address']);
+                    $('#mesas').text(response['num_mesas'])
                 },
-                error: function(response){
-                    alert(JSON.stringify(response));
+                error: function(error){
+                    alert(error);
                 }
             });
         }

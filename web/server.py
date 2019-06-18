@@ -1,13 +1,24 @@
 from flask import Flask, render_template, request, session, Response, redirect
 from database import connector
 from model import entities
+#from flask_mail import Mail, Message
+
 import json
 import time
+import smtplib
 
 db = connector.Manager()
 engine = db.createEngine()
 
 app = Flask(__name__)
+
+#app.config['MAIL_SERVER']='mail.gmail.com'
+#app.config['MAIL_PORT']=587
+#app.config['MAIL_USE_SSL']=True
+#app.config['MAIL_USERNAME']='netchmap@gmail.com'
+#app.config['MAIL_PASSWORD']='susti con fe'
+
+#mail = Mail(app)
 
 @app.route('/')
 def main():
@@ -165,9 +176,9 @@ def show_restaurant(rest):
 
 @app.route('/restaurant', methods=['GET'])
 def get_restaurant():
-    session = db.getSession(engine)
-    dbResponse = session.query(entities.Restaurante)
-    return render_template('restaurant.html')
+    db_session = db.getSession(engine)
+    restaurant = db_session.query(entities.Restaurante).filter(entities.Restaurante.id == res_id).one()
+    return Response(json.dumps(restaurant, cls=connector.AlchemyEncoder), mimetype='application/json')
 
 
 @app.route('/add_menu/', methods=['GET'])
@@ -175,8 +186,8 @@ def add_menu():
     db_session = db.getSession(engine)
     plate = entities.Menu(
         restaurant_id=1,
-        tipo_plato="entrada",
-        name="Tequeños"
+        tipo_plato="segundo",
+        name="Arroz con mariscos"
     )
     db_session.add(plate)
     db_session.commit()
@@ -198,6 +209,24 @@ def get_menu():
 
 
 ## End Menu methods ##
+
+@app.route('/soporte', methods=['POST'])
+def send_email():
+    respuesta = json.loads(request.data)
+    #subject = respuesta["subject"]
+    #msg = respuesta["msg"]
+    #subject="Ella"
+    #msg="aea"
+    server = smtplib.SMTP('smtp.gmail.com:587')
+    server.ehlo()
+    server.starttls()
+    server.login("netchmap@gmail.com", "susti con fe")
+    messagegmail = 'Subject: {}\n\n{}'.format(respuesta["subject"], respuesta["message"])
+    server.sendmail("netchmap@gmail.com", "netchmap@gmail.com", messagegmail)
+    server.quit()
+    response = {'message': 'Reclamo registrado'}
+    return Response(json.dumps(response, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
+
 
 if __name__ == '__main__':
     app.run()

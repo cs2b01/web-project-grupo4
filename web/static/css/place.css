@@ -142,7 +142,9 @@ p, li{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9c2849', endColorstr='#c11128', GradientType=1 );
 
 }
-.baner p, .baner span{
+.baner p{
+    display: inline-block;
+    width: 100%;
     text-align: center;
     color: #fff;
     font-size: 2.5em;
@@ -150,12 +152,6 @@ p, li{
     line-height: 3rem;
 }
 
-.baner span{
-    display: inline-block;
-    margin-left: 0.13em;
-    line-height: 100%;
-    font-size: 2.8em;
-}
 
 @media screen and (min-width: 980px){
     .contenedor{
