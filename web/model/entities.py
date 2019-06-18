@@ -35,3 +35,11 @@ class Restaurante(connector.Manager.Base):
     num_mesas = Column(Integer)
     address = Column(String(50))
     slogan = Column(String(20))
+
+
+class Menu(connector.Manager.Base):
+    __tablename__ = 'menu'
+    id = Column(Integer, Sequence('menu_id_seq'), primary_key=True)
+    restaurant_id = Column(Integer)
+    tipo_plato = Column(String(10))
+    name = Column(String(30))

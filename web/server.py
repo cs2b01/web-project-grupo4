@@ -152,6 +152,47 @@ def get_restaurantes():
         data.append(restaurante)
     return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
 
+
+res_id = 0
+
+
+@app.route('/restaurantes/<int:rest>')
+def show_restaurant(rest):
+    global res_id
+    res_id = rest
+    return render_template('restaurant.html')
+
+
+@app.route('/restaurant', methods=['GET'])
+def get_restaurant():
+    session = db.getSession(engine)
+    dbResponse = session.query(entities.Restaurante)
+    return render_template('restaurant.html')
+
+
+@app.route('/add_menu/', methods=['GET'])
+def add_menu():
+    db_session = db.getSession(engine)
+    plate = entities.Menu(
+        restaurant_id=1,
+        tipo_plato="entrada",
+        name="Tequeños"
+    )
+    db_session.add(plate)
+    db_session.commit()
+    return "Plato de menu creado"
+
+
+@app.route('/menu', methods=['GET'])
+def get_menu():
+    db_session = db.getSession(engine)
+    menu = db_session.query(entities.Menu).filter(entities.Menu.restaurant_id == res_id)
+    data = []
+    for item in menu:
+        data.append(item)
+    return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
+
+
 ## End Methods Resturants ##
 
 if __name__ == '__main__':
