@@ -41,26 +41,34 @@
 
         var markers = [
           ['UTEC - piso 2', -12.135601, -77.022506],
-          ['UTEC - Piso 6', -12.135486, -77.022223],
-          ['Salomé', -12.137139,  -77.020528],
+          ['Rico y barato', -12.136580, -77.021784],
+          ['El Huequito', -12.137139,  -77.020528],
           ['Rincon Torrepa', -12.136653, -77.020507],
-          ['Menu de casa', -12.135239, -77.020970],
-          ['D Lucas', -12.135619, -77.021855],
+          ['Vamos Peru', -12.135239, -77.020970],
+          ['La sazón del Guima', -12.135619, -77.021855],
         ];
 
         //InfoWindow de cada marcador
-        var infoWindowContent = [];
-
-        var markerContent = (restName) => {
-          var cadena = ['<div class="info_content">' +
-            '<h3>' + restName +'</h3>' + '<p>3 opciones de menú</p>'+
-            '<a href="/static/'+ restName.replace(/ /g, "") +'.html">Ver menu</a>'];
-          return cadena;
-        }
-
-        for (var i = 0; i < markers.length; i++) {
-          infoWindowContent.push(markerContent(markers[i][0]));
-        }
+        var infoWindowContent = [
+          ['<div class="info_content">' +
+          '<h3>UTEC - piso 2</h3>' +
+          '<p>Opciones de menú</p>'+'<a href="/restaurantes/">Ver menu</a>'],
+          ['<div class="info_content">' +
+          '<h3>Rico y barato</h3>' +
+          '<p>Opciones de menú</p>'+'<a href="/restaurantes/6">Ver menu</a>'],
+          ['<div class="info_content">' +
+          '<h3>El Huequito</h3>' +
+          '<p>Opciones de menú</p>'+'<a href="/restaurantes/1">Ver menu</a>'],
+          ['<div class="info_content">' +
+          '<h3>Rincon Torrepa</h3>' +
+          '<p>Opciones de menú</p>'+'<a href="/restaurantes/2">Ver menu</a>'],
+          ['<div class="info_content">' +
+          '<h3>Vamos Peru</h3>' +
+          '<p>Opciones de menú</p>'+'<a href="/restaurantes/4">Ver menu</a>'],
+          ['<div class="info_content">' +
+          '<h3>La sazón del Guima</h3>' +
+          '<p>Opciones de menú</p>'+'<a href="/restaurantes/5">Ver menu</a>']
+        ];
 
         var infoWindow = new google.maps.InfoWindow(), marker, i;
 
