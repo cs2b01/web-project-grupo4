@@ -20,22 +20,63 @@
     <div class="nav">
 
         <div class="wrap">
-            <nav>
+
+            <nav id="inicial">
                 <ul>
                     <li>
-                        <a href="#">Inicio</a>
+                        <a href="/">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="/static/ComoFunciona.html">¿Cómo funciona?</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav id="administrador" style="display: none">
+                <ul>
+                    <li>
+                        <a href="/">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="/clients">User Admin</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav id="restaurantes" style="display: none">
+                <ul>
+                    <li>
+                        <a href="/">Inicio</a>
                     </li>
                     <li>
                         <a href="/static/ComoFunciona.html">¿Cómo funciona?</a>
                     </li>
                     <li>
-                        <a href="/static/atencion_cliente.html">Atención al cliente</a>
+                        <a href="/static/atencion_cliente.html">Atención Cliente</a>
+                    </li>
+                    <li>
+                        <a href="/static/register_menu.html">Registrar menú</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav id="usuario" style="display: none">
+                <ul>
+                    <li>
+                        <a href="/">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="/static/ComoFunciona.html">¿Cómo funciona?</a>
+                    </li>
+                    <li>
+                        <a href="/static/atencion_cliente.html">Atención Cliente</a>
                     </li>
                     <li>
                         <a href="/static/mapa.html">Restaurantes</a>
                     </li>
                 </ul>
             </nav>
+
         </div>
     </div>
 
@@ -85,7 +126,6 @@
         <li><a href="http://www" target="_blank" class="icon-play"></a></li>
         <li><a href="http://www" target="_blank" class="icon-android"></a></li>
         <li><a href="http://www" target="_blank" class="icon-appleinc"></a></li>
-        <li><a href="/clients" id="settings" target="_blank" class="icon-connection" style="display: none"></a></li>
     </ul>
 </div>
 
@@ -114,15 +154,34 @@
 
             },
             error: function(response){
-                if(response['status']==401){
+                if (response['status']==400){
                     alert('Error en los datos, inténtalo nuevamente');
+                    document.getElementById("inicial").style.display = "inline";
+                    document.getElementById("administrador").style.display = "none";
+                    document.getElementById("restaurantes").style.display = "none";
+                    document.getElementById("usuario").style.display = "none";
                 }
-                else{
-                    if(response['status']==300){
-                        alert('Sesión iniciada como administrador');
-                        document.getElementById("settings").style.display = "inline";
-                    } else{
+                else {
+                    if (response['status']==303){
                         alert('Sesión iniciada como usuario');
+                        document.getElementById("usuario").style.display = "inline";
+                        document.getElementById("restaurantes").style.display = "none";
+                        document.getElementById("administrador").style.display = "none";
+                        document.getElementById("inicial").style.display = "none";
+                    }
+                    /*else if (response['status']==404) {
+                        alert('Sesión iniciada como usuario');
+                        document.getElementById("usuario").style.display = "inline";
+                        document.getElementById("restaurantes").style.display = "none";
+                        document.getElementById("administrador").style.display = "none";
+                        document.getElementById("inicial").style.display = "none";
+                    }*/
+                    else {
+                        alert('Sesión iniciada como dueño de restaurante');
+                        document.getElementById("restaurantes").style.display = "inline";
+                        document.getElementById("administrador").style.display = "none";
+                        document.getElementById("inicial").style.display = "none";
+                        document.getElementById("usuario").style.display = "none";
                     }
                     document.getElementById("barra_login").style.display = "none";
                     document.getElementById("soy_nuevo").style.display = "none";

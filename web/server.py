@@ -19,6 +19,7 @@ def main():
 def static_content(content):
     return render_template(content)
 
+
 @app.route('/clients', methods=['GET'])
 def get_clients():
     session = db.getSession(engine)
@@ -27,6 +28,7 @@ def get_clients():
     for user in dbResponse:
         data.append(user)
     return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
+
 
 @app.route('/clients/<id>', methods=['GET'])
 def get_client(id):
@@ -38,6 +40,7 @@ def get_client(id):
 
     message = { 'status': 404, 'message': 'Not Found' }
     return Response(message, status=404, mimetype='application/json')
+
 
 @app.route('/create_test_clients', methods=['GET'])
 def create_test_clients():
@@ -53,6 +56,7 @@ def create_test_clients():
     db_session.add(user)
     db_session.commit()
     return "Test client created!"
+
 
 @app.route('/clients', methods=['POST'])
 def create_client():
@@ -73,7 +77,8 @@ def create_client():
     #return Response(message, status=200, mimetype='application/json')
     return Response(json.dumps(message, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
 
-@app.route('/authenticate', methods = ["POST"])
+
+@app.route('/authenticate', methods=["POST"])
 def authenticate():
     time.sleep(2)
     message = json.loads(request.data)
@@ -82,25 +87,39 @@ def authenticate():
 
     db_session = db.getSession(engine)
     try:
+
         if username == "piero16301" or "angelinux" or "THEFLILUX":
             user = db_session.query(entities.Client
                    ).filter(entities.Client.username == username
                    ).filter(entities.Client.password == password
                    ).one()
             message = {'message': 'Admin_auth'}
-            return Response(message, status=300, mimetype='application/json')
+            return Response(message, status=303, mimetype='application/json')
 
     except Exception:
+
         try:
             user = db_session.query(entities.Client
                    ).filter(entities.Client.username == username
                    ).filter(entities.Client.password == password
                    ).one()
             message = {'message': 'User_auth'}
-            return Response(message, status=100, mimetype='application/json')
+            return Response(message, status=404, mimetype='application/json')
+
         except Exception:
-            message = {'message': 'Unauthorized'}
-            return Response(message, status=401, mimetype='application/json')
+
+            try:
+                user = db_session.query(entities.Restaurante
+                          ).filter(entities.Restaurante.username == username
+                          ).filter(entities.Restaurante.password == password
+                          ).one()
+                message = {'message': 'Rest_auth'}
+                return Response(message, status=200, mimetype='application/json')
+
+            except Exception:
+                message = {'message': 'Unauthorized'}
+                return Response(message, status=400, mimetype='application/json')
+
 
 @app.route('/clients', methods=['PUT'])
 def update_client():
