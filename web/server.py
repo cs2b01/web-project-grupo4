@@ -188,9 +188,24 @@ def add_menu():
 
 @app.route('/add_menu/', methods=['POST'])
 def register_menu():
-    #db_session = db.getSession(engine)
+    db_session = db.getSession(engine)
     message = json.loads(request.data)
     print(message)
+    for key in message:
+        if 'entrada' in key:
+            tipo = 'entrada'
+        elif 'segundo' in key:
+            tipo = 'segundo'
+        else:
+            print("Tipo de comida desconocida")
+            tipo = 'otro'
+        plate = entities.Menu(
+            restaurant_id=2,
+            tipo_plato=tipo,
+            name=message.get(key)
+        )
+        db_session.add(plate)
+    db_session.commit()
     response = {'message': 'Menu registered'}
     return Response(json.dumps(response, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
 
@@ -204,7 +219,14 @@ def get_menu():
         data.append(item)
     return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
 
-
+@app.route('/getmenu/<int:id_r>')
+def get_menu_restaurante(id_r):
+    db_session = db.getSession(engine)
+    menu = db_session.query(entities.Menu).filter(entities.Menu.restaurant_id == id_r)
+    data = []
+    for item in menu:
+        data.append(item)
+    return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
 ## End Menu methods ##
 
 @app.route('/soporte', methods=['POST'])
