@@ -89,7 +89,6 @@ def authenticate():
                    ).one()
             message = {'message': 'Admin_auth'}
             return Response(message, status=300, mimetype='application/json')
-
     except Exception:
         try:
             user = db_session.query(entities.Client
