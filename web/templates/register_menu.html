@@ -2,9 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Agregar Menú</title>
+    <link rel="icon" href="/static/images/icono.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/register_menu.js"></script>
 </head>
 <body>
-
+<div class="container">
+    <br />
+    <br />
+    <h1 align="center">Ingresa el menú del día</h1>
+    <div class="form-group">
+        <form name="register_menu" id="register_menu">
+            <table class="table table-bordered" id="tableform">
+                <tr>
+                    <td><input type="text" name="entrada1" id="entrada" placeholder="Ingresar entrada" class="form-control entrada_list"></td>
+                    <td><button name="agregar_entrada" id="add_entrada">Más entradas</button></td>
+                </tr>
+            </table>
+            <table id="tablesegundo">
+                <tr>
+                    <td><input type="text" name="segundo1" id="segundo" placeholder="Ingresar segundo" class="form-control entrada_list"></td>
+                    <td><button name="agregar_segundo" id="add_segundo">Más segundos</button></td>
+                </tr>
+            </table>
+            <input type="submit" name="enviar_menu" id="sendMenu" value="sendMenu">
+        </form>
+    </div>
+</div>
 </body>
 </html>

@@ -166,7 +166,6 @@ def get_restaurantes():
 
 res_id = 0
 
-
 @app.route('/restaurantes/<int:rest>')
 def show_restaurant(rest):
     global res_id
@@ -180,7 +179,9 @@ def get_restaurant():
     restaurant = db_session.query(entities.Restaurante).filter(entities.Restaurante.id == res_id).one()
     return Response(json.dumps(restaurant, cls=connector.AlchemyEncoder), mimetype='application/json')
 
+## End Methods Resturants ##
 
+## Menu methods ##
 @app.route('/add_menu/', methods=['GET'])
 def add_menu():
     db_session = db.getSession(engine)
@@ -194,6 +195,15 @@ def add_menu():
     return "Plato de menu creado"
 
 
+@app.route('/add_menu/', methods=['POST'])
+def register_menu():
+    #db_session = db.getSession(engine)
+    message = json.loads(request.data)
+    print(message)
+    response = {'message': 'Menu registered'}
+    return Response(json.dumps(response, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
+
+
 @app.route('/menu', methods=['GET'])
 def get_menu():
     db_session = db.getSession(engine)
@@ -202,10 +212,6 @@ def get_menu():
     for item in menu:
         data.append(item)
     return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
-
-## End Methods Resturants ##
-
-## Menu methods ##
 
 
 ## End Menu methods ##
