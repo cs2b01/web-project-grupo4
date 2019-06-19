@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, session, Response, redirect
 from database import connector
 from model import entities
-#from flask_mail import Mail, Message
 
 import json
 import time
@@ -11,14 +10,6 @@ db = connector.Manager()
 engine = db.createEngine()
 
 app = Flask(__name__)
-
-#app.config['MAIL_SERVER']='mail.gmail.com'
-#app.config['MAIL_PORT']=587
-#app.config['MAIL_USE_SSL']=True
-#app.config['MAIL_USERNAME']='netchmap@gmail.com'
-#app.config['MAIL_PASSWORD']='susti con fe'
-
-#mail = Mail(app)
 
 @app.route('/')
 def main():
@@ -218,11 +209,14 @@ def get_menu():
 
 @app.route('/soporte', methods=['POST'])
 def send_email():
+    db_session = db.getSession(engine)
     respuesta = json.loads(request.data)
-    #subject = respuesta["subject"]
-    #msg = respuesta["msg"]
-    #subject="Ella"
-    #msg="aea"
+
+    reclamos=entities.Reclamo(
+        subject=respuesta["subject"],
+        msg=respuesta["message"]
+    )
+
     server = smtplib.SMTP('smtp.gmail.com:587')
     server.ehlo()
     server.starttls()
@@ -230,6 +224,8 @@ def send_email():
     messagegmail = 'Subject: {}\n\n{}'.format(respuesta["subject"], respuesta["message"])
     server.sendmail("netchmap@gmail.com", "netchmap@gmail.com", messagegmail)
     server.quit()
+    db_session.add(reclamos)
+    db_session.commit()
     response = {'message': 'Reclamo registrado'}
     return Response(json.dumps(response, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
 
