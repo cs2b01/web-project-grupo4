@@ -219,7 +219,7 @@ def register_menu():
             print("Tipo de comida desconocida")
             tipo = 'otro'
         plate = entities.Menu(
-            restaurant_id=2,
+            restaurant_id=8,
             tipo_plato=tipo,
             name=message.get(key)
         )
