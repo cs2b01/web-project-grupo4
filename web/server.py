@@ -94,7 +94,7 @@ def authenticate():
                    ).filter(entities.Client.password == password
                    ).one()
             message = {'message': 'Admin_auth'}
-            return Response(message, status=303, mimetype='application/json')
+            return Response(json.dumps(message, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
     except Exception:
 
         try:
