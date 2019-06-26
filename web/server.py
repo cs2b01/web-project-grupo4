@@ -95,7 +95,6 @@ def authenticate():
                    ).one()
             message = {'message': 'Admin_auth'}
             return Response(message, status=303, mimetype='application/json')
-
     except Exception:
 
         try:
@@ -103,8 +102,9 @@ def authenticate():
                    ).filter(entities.Client.username == username
                    ).filter(entities.Client.password == password
                    ).one()
-            message = {'message': 'User_auth'}
-            return Response(message, status=404, mimetype='application/json')
+            message = {'message': 'Authorized'}
+            return Response(json.dumps(message, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
+            #return Response(message, status=404, mimetype='application/json')
 
         except Exception:
 
@@ -118,7 +118,8 @@ def authenticate():
 
             except Exception:
                 message = {'message': 'Unauthorized'}
-                return Response(message, status=400, mimetype='application/json')
+                return Response(json.dumps(message, cls=connector.AlchemyEncoder), status=401, mimetype='application/json')
+                #return Response(message, status=400, mimetype='application/json')
 
 
 @app.route('/clients', methods=['PUT'])
