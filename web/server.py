@@ -231,7 +231,7 @@ def register_menu():
     return Response(json.dumps(response, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
 
 
-@app.route('/add_menu/<int:restau>/<nombre>', methods=['POST'])
+@app.route('/add_menu/<int:restau>/<nombre>', methods=['GET'])
 def other_menu(restau,nombre):
     db_session = db.getSession(engine)
     plate = entities.Menu(
