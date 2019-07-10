@@ -172,7 +172,8 @@ def get_restaurantes():
     data = []
     for restaurante in dbResponse:
         data.append(restaurante)
-    return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
+    message = {'data': data }
+    return Response(json.dumps(message, cls=connector.AlchemyEncoder), mimetype='application/json')
 
 
 res_id = 0
