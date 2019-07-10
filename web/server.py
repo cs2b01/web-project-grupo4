@@ -93,7 +93,7 @@ def authenticate():
                    ).filter(entities.Client.username == username
                    ).filter(entities.Client.password == password
                    ).one()
-            message = {'message': 'Authorized', 'user_id':user.id, 'username':user.username}
+            message = {'message': 'Authorized', 'user_id':user.id, 'username':user.username, "fullname" : user.fullname, "name" : user.name}
             return Response(json.dumps(message, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
     except Exception:
 
@@ -102,7 +102,7 @@ def authenticate():
                    ).filter(entities.Client.username == username
                    ).filter(entities.Client.password == password
                    ).one()
-            message = {'message': 'Authorized', 'user_id':user.id, 'username':user.username}
+            message = {'message': 'Authorized', 'user_id':user.id, 'username':user.username, "fullname" : user.fullname, "name" : user.name}
             return Response(json.dumps(message, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
             #return Response(message, status=404, mimetype='application/json')
 
@@ -239,6 +239,18 @@ def get_menu():
     for item in menu:
         data.append(item)
     return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
+
+
+@app.route('/menu', methods=['GET'])
+def get_menu():
+    db_session = db.getSession(engine)
+    menu = db_session.query(entities.Menu).filter(entities.Menu.restaurant_id == res_id)
+    data = []
+    for item in menu:
+        data.append(item)
+    return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
+
+
 
 @app.route('/getmenu/<int:id_r>')
 def get_menu_restaurante(id_r):
