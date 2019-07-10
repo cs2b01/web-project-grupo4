@@ -249,7 +249,7 @@ def get_menu():
     for item in menu:
         data.append(item)
     restaurant = db_session.query(entities.Restaurante).filter(entities.Restaurante.id == rest).one()
-    message = {'menu': data, "restaurant" : restaurant}
+    message = {'menu': data, "restaurant" : restaurant.name_restaurant}
     return Response(json.dumps(message, cls=connector.AlchemyEncoder), mimetype='application/json')
 
 
