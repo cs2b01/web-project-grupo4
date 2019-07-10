@@ -232,7 +232,7 @@ def register_menu():
 
 
 @app.route('/menu', methods=['GET'])
-def get_menu():
+def get_menu_id():
     db_session = db.getSession(engine)
     menu = db_session.query(entities.Menu).filter(entities.Menu.restaurant_id == res_id)
     data = []
@@ -241,14 +241,16 @@ def get_menu():
     return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
 
 
-@app.route('/menu', methods=['GET'])
+@app.route('/menu/<int:rest>', methods=['GET'])
 def get_menu():
     db_session = db.getSession(engine)
-    menu = db_session.query(entities.Menu).filter(entities.Menu.restaurant_id == res_id)
+    menu = db_session.query(entities.Menu).filter(entities.Menu.restaurant_id == rest)
     data = []
     for item in menu:
         data.append(item)
-    return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
+    restaurant = db_session.query(entities.Restaurante).filter(entities.Restaurante.id == rest).one()
+    message = {'menu': data, "restaurant" : restaurant}
+    return Response(json.dumps(message, cls=connector.AlchemyEncoder), mimetype='application/json')
 
 
 
