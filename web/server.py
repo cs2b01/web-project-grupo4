@@ -93,7 +93,7 @@ def authenticate():
                    ).filter(entities.Client.username == username
                    ).filter(entities.Client.password == password
                    ).one()
-            message = {'message': 'Admin_auth'}
+            message = {'message': 'Authorized', 'user_id':user.id, 'username':user.username}
             return Response(json.dumps(message, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
     except Exception:
 
@@ -102,7 +102,7 @@ def authenticate():
                    ).filter(entities.Client.username == username
                    ).filter(entities.Client.password == password
                    ).one()
-            message = {'message': 'Authorized'}
+            message = {'message': 'Authorized', 'user_id':user.id, 'username':user.username}
             return Response(json.dumps(message, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
             #return Response(message, status=404, mimetype='application/json')
 
@@ -113,7 +113,7 @@ def authenticate():
                           ).filter(entities.Restaurante.username == username
                           ).filter(entities.Restaurante.password == password
                           ).one()
-                message = {'message': 'Rest_auth'}
+                message = {'message': 'Rest_auth', 'user_id':user.id, 'username':user.username}
                 return Response(message, status=200, mimetype='application/json')
 
             except Exception:
