@@ -241,14 +241,14 @@ def get_menu_id():
     return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
 
 
-@app.route('/menu/<int:rest>', methods=['GET'])
-def get_menu():
+@app.route('/menu/<int:restau>', methods=['GET'])
+def get_menu(restau):
     db_session = db.getSession(engine)
-    menu = db_session.query(entities.Menu).filter(entities.Menu.restaurant_id == rest)
+    menu = db_session.query(entities.Menu).filter(entities.Menu.restaurant_id == restau)
     data = []
     for item in menu:
         data.append(item)
-    restaurant = db_session.query(entities.Restaurante).filter(entities.Restaurante.id == rest).one()
+    restaurant = db_session.query(entities.Restaurante).filter(entities.Restaurante.id == restau).one()
     message = {'menu': data, "restaurant" : restaurant.name_restaurant}
     return Response(json.dumps(message, cls=connector.AlchemyEncoder), mimetype='application/json')
 
